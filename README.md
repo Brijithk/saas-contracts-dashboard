@@ -1,69 +1,90 @@
-# React + TypeScript + Vite
+# SaaS Contracts Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple **React + Vite** dashboard application styled with **Tailwind CSS**, built for learning and experimentation.  
+This app is deployed using **GitHub Pages**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Setup Instructions
 
-## Expanding the ESLint configuration
+### 1. Clone the repository
+```bash
+git clone https://github.com/<your-username>/saas-contracts-dashboard.git
+cd saas-contracts-dashboard
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+3. Run locally
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Now open your browser at:
+http://localhost:5173
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+6. Deploy to GitHub Pages
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Install the deploy helper (only once):
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+npm install gh-pages --save-dev
+
+
+Add this to your package.json:
+
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  }
+}
+
+
+Use this vite.config.ts so GitHub Pages serves your app correctly:
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// Replace `saas-contracts-dashboard` with your repo name if different
+export default defineConfig({
+  base: "/saas-contracts-dashboard/",
+  plugins: [react()],
+})
+
+
+Deploy:
+
+npm run build
+npm run deploy
+
+
+Your app will be live at:
+
+https://<your-username>.github.io/saas-contracts-dashboard/
+
+🛠 Tech Stack Choices
+
+React 19 → UI components
+
+Vite 7 → Development/build tool
+
+Tailwind CSS 4 → Styling
+
+React Router DOM 7 → Routing
+
+TypeScript 5 → Type safety
+
+GitHub Pages + gh-pages → Deployment
+
+✅ Assumptions Made
+
+This project is frontend-only (no backend APIs).
+
+Hosting is done on GitHub Pages (not Netlify/Vercel).
+
+Node.js v16+ is required.
+
+Repository name is saas-contracts-dashboard, so the Vite base path matches.
+
+Deployment branch will be created as gh-pages automatically by the deploy script.
